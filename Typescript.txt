@@ -1,0 +1,122 @@
+https://www.typescriptlang.org/play/
+
+//Interface example
+interface connect{
+    openconnection(): void;
+    closeconnection(): void;
+}
+
+class OracleDatabase implements connect{
+    openconnection(): void{
+        console.log("opening oracle connection");
+    }
+
+    closeconnection(): void{
+        console.log("closing oracle connection");
+    }
+}
+
+class SyDatabase implements connect{
+    openconnection(): void{
+        console.log("opening sybase connection");
+    }
+
+    closeconnection(): void{
+        console.log("closing sybase connection");
+    }
+}
+class Account {
+    acctno: string
+
+    constructor() {
+        this.acctno="A001"
+    }
+    display(): void {
+        console.log("inside display method..." + this.acctno);
+    }
+}
+
+class SavingAccount extends Account{
+    balance: number;
+    //Constructor 
+    constructor() {
+        //Calling base class constructor
+        super();
+        this.balance = 5600;
+    }
+
+    print(): void{
+        console.log("Account num : " + this.acctno);
+        console.log("Balance is " + this.balance);
+    }
+
+    //Overloading function with string or number parameter
+    pickData(data: string): string;
+    pickData(data: number): number;
+    pickData(data): any{
+        if (typeof data === "string")
+            return data.toUpperCase();
+        if (typeof data === "number")
+            return data * data;
+    }
+} 
+
+class Deposit{
+    //b is optional parameter where value may or may not be set
+    AddAmount(a: number, b?: number)
+    {
+        return a + b;
+    }
+}
+
+class Pizza{
+    static staticPizzaVar: string;
+    instancePizzaVar: string;
+    constructor(instancePizzaVar: string) {
+        this.instancePizzaVar = instancePizzaVar;
+    }
+
+    static staticPizzaMethod() {
+        return Pizza.staticPizzaVar;
+    }
+
+    private _name: string;
+    get name(): string{
+        return this._name;
+    }
+    set name(name)
+    {
+        this._name = name;
+    }
+}
+
+//Instance Variable
+var pizzatype = new Pizza("Veg");
+console.log(pizzatype.instancePizzaVar);
+
+//Static Variable and Static Method
+Pizza.staticPizzaVar = "PizzaBaseWheat";
+Pizza.staticPizzaMethod();
+
+//Getter and Setter
+pizzatype.name = "Garlic";
+console.log(pizzatype.name);
+
+var acc: Account;
+acc = new Account();
+acc.display();
+
+var s: SavingAccount;
+s = new SavingAccount();
+s.print();
+
+console.log("Overloaded Parameters")
+console.log(s.pickData("Karthik"));
+console.log(s.pickData(5));
+
+var dep = new Deposit();
+console.log(dep.AddAmount(500, 200));
+
+//Arrow Function sample
+var addDeposit = (fno: number, sno: number) => fno + sno;
+console.log(addDeposit(2000, 3000));
